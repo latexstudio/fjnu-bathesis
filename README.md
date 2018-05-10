@@ -39,7 +39,7 @@
 \eid{×××（学号）}
 \eauthor{×××（作者姓名）}
 \etutor{×××（指导教师姓名）}
-\eaddress{×××（地址）}
+\eaddress{×××（通讯地址）}
 ```
 
 ```
@@ -74,6 +74,11 @@
 
 采用五号字，其中每章标题用黑体字，每节标题用宋体字，并注明各章节起始页码，题目和页码用`……`相连，目录中标题应与正文中标题一致。
 
+
+```
+\tableofcontents
+```
+
 ### （六）正文行间距要求
 
 正文行距设置：设单倍行距。
@@ -95,7 +100,7 @@
 >1.1.1
 
 ```
-\documentclass{bathesis}
+\documentclass[subject=science]{bathesis}
 ```
 
 第二种
@@ -109,7 +114,7 @@
 >（1）
 
 ```
-\documentclass[zhnumber]{bathesis}
+\documentclass[subject=arts]{bathesis}
 ```
 
 理工科专业应采用第一种。
@@ -218,11 +223,15 @@
 > [2] ××××××××××××××××××××××××××
 
 ```
-\cite{}
-\parencite{}
+\printbibliography
 ```
 
 正文引用参考文献处应以方括号右上标注出。如`……效率可提高25%`<sup>[2]</sup>,表示此结果援引自参考文献2。
+
+```
+\cite{}
+\parencite{}
+```
 
 参考文献的编写方式为：
 
