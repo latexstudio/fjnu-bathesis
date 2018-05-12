@@ -1,26 +1,29 @@
 %本科毕业论文（设计）打印格式
 \ProvidesClass{bathesis}
 
-\RequirePackage{kvoptions}
-\newcommand*{\@science}{science}
-\newcommand*{\@arts}{arts}
-\DeclareStringOption[science]{subject}
-\DeclareDefaultOption{\PassOptionsToClass{\CurrentOption}{ctexrep}}
-\ProcessKeyvalOptions*
-\LoadClass[UTF8,fontset=none,zihao=5,linespread=1.23809]{ctexrep}
+\newif\if@arabic
+\DeclareOption{arabic}{\@arabictrue}
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{ctexbook}}
+\ProcessOptions\relax
+
+\PassOptionsToClass{zihao=5,linespread=1.23809,oneside}{ctexbook}
+\LoadClass[UTF8,fontset=none,a4paper,openany]{ctexbook}
 
 %一、毕业论文（设计）用纸、页面设置要求 
 %毕业论文（设计）应按规定格式用激光打印机单面打印，纸张大小一律使用国际标准A4型复印纸。
 %页面设置：版心为297×210mm；页边距要求：每一面的上方（T）2 cm，下方（B）2cm，左（L）2.0 cm，右（R）2cm，装订线（T）0.5 cm，装订线位置（T）左，页脚1cm，页眉1cm，页码设置为：插入页码，居中；其余设置采取系统默认设置。
-\RequirePackage[a4paper,top=2cm,bottom=2cm,left=2cm,right=2cm,bindingoffset=0.5cm,footskip=1cm,headsep=1cm]{geometry}
+\RequirePackage{geometry}
+\geometry{top=2cm,bottom=2cm,left=2cm,right=2cm,%
+  bindingoffset=0.5cm,footskip=1cm}
 \RequirePackage{fancyhdr}
 \fancypagestyle{plain}{%
-  \fancyhead{}%
-  \cfoot{\zihao{-5}\thepage}%
+  \fancyhead{}
+  \fancyfoot[C]{\zihao{-5}\thepage}
   \renewcommand{\headrulewidth}{0pt}}
 \pagestyle{plain}
 
 %二、毕业论文（设计）内容打印要求
+\setmainfont{Times New Roman}
 \xeCJKsetup{AutoFakeBold=true}
 \setCJKmainfont{SimSun}
 \setCJKfamilyfont{zhkai}{KaiTi}
@@ -29,13 +32,11 @@
 \newcommand*{\songti}{\CJKfamily{zhsong}}
 \newcommand*{\heiti}{\CJKfamily{zhhei}}
 \newcommand*{\kaishu}{\CJKfamily{zhkai}}
-\setmainfont{Times New Roman}
 
 %%（一）论文题目：使用小二号黑体，加粗,居中。若有副标题，四号黑体。
 %%（二）学院、专业、学号、作者姓名、指导教师姓名、（小四号楷体，加粗），依次排印在论文题目下（上空一行，居中），如：
 %%　　　×××学院　 ×××专业（单倍行距）
 %%×××（学号）　×××（姓名）　　指导教师　×××
-\newcommand*{\blankline}{\vspace*{15.6585pt}}
 \newcommand*{\@ctitle}{}
 \newcommand*{\ctitle}[1]{\renewcommand*{\@ctitle}{#1}}
 \newcommand*{\@csubtitle}{}
@@ -50,19 +51,6 @@
 \newcommand*{\cauthor}[1]{\renewcommand*{\@cauthor}{#1}}
 \newcommand*{\@ctutor}{}
 \newcommand*{\ctutor}[1]{\renewcommand*{\@ctutor}{#1}}
-\newcommand{\makectitle}{%
-  \clearpage%
-  \begingroup%
-    \centering\heiti\bfseries%
-    \linespread{1.44444}\zihao{-2}\@ctitle\par%
-    \linespread{1.08333}\zihao{-4}\@csubtitle\par%
-  \endgroup%
-  \blankline%
-  \begingroup%
-    \centering\kaishu\bfseries\linespread{1.08333}\zihao{-4}%
-    \@ccollege\qquad \@cmajor\par%
-    \@cid\qquad \@cauthor\qquad 指导教师\quad \@ctutor\par%
-  \endgroup}
 \newcommand*{\@etitle}{}
 \newcommand*{\etitle}[1]{\renewcommand*{\@etitle}{#1}}
 \newcommand*{\@eid}{}
@@ -73,71 +61,86 @@
 \newcommand*{\etutor}[1]{\renewcommand*{\@etutor}{#1}}
 \newcommand*{\@eaddress}{}
 \newcommand*{\eaddress}[1]{\renewcommand*{\@eaddress}{#1}}
+
+\newcommand*{\blankline}{\vspace*{15.6bp}}
+\newcommand{\makectitle}{%
+  \clearpage
+  \begingroup
+    \centering\heiti\bfseries
+    \linespread{1.44444}\zihao{-2}\@ctitle\par
+    \linespread{1.08333}\zihao{-4}\@csubtitle\par
+  \endgroup
+  \blankline
+  \begingroup
+    \centering\kaishu\bfseries\linespread{1.08333}\zihao{-4}%
+    \@ccollege\qquad \@cmajor\par%
+    \@cid\qquad \@cauthor\qquad 指导教师\quad \@ctutor\par
+  \endgroup}
 \newcommand{\makeetitle}{%
-  \clearpage%
-  \begingroup%
-    \centering\linespread{1.44444}\zihao{-2}\bfseries\@etitle\par%
-  \endgroup%
-  \blankline%
-  \begingroup%
-    \centering\linespread{1.08333}\zihao{-4}%
-    \@eid\qquad \@eauthor\qquad Tutor:\@etutor\par%
-    (\@eaddress)\par%
+  \clearpage
+  \begingroup
+    \centering\linespread{1.44444}\zihao{-2}\bfseries\@etitle\par
+  \endgroup
+  \blankline
+  \begingroup
+    \centering\linespread{1.08333}\zihao{-4}
+    \@eid\qquad \@eauthor\qquad Tutor:\@etutor\par
+    (\@eaddress)\par
   \endgroup}
 
 %%（三）摘要（上空一行，缩进2个汉字字符）
 %%中文摘要采用小五号楷体，英文摘要采用五号“Time  New  Roman”字型；行距设置为：单倍行距。
 %%【摘　要】(小五号黑体，加粗)　××（小五号楷体，加粗）
-\newenvironment{cabstract}{\linespread{1.44444}\zihao{-5}\bfseries{\heiti【摘\quad 要】}\kaishu}{\par}
-\newenvironment{eabstract}{\linespread{1.23809}\zihao{5}\textbf{Abstract:}~}{\par}
+\newenvironment{cabstract}{%
+  \linespread{1.44444}\zihao{-5}\kaishu\bfseries
+  \begingroup
+    \heiti【摘\quad 要】
+  \endgroup}{\par}
+\newenvironment{eabstract}{%
+  \linespread{1.23809}\zihao{5}\textbf{Abstract:}~}{\par}
 
 %%（四）关键词
 %%中文关键词（3—5个）采用小五号楷体，英文关键词采用五号“Time  New  Roman”字型；行距设置为：单倍行距。
 %%【关键词】(小五号黑体，加粗)×××；××；××；×××（小五号楷体，加粗）
-\newenvironment{ckeywords}{\linespread{1.44444}\zihao{-5}\bfseries{\heiti【关键词】}\kaishu}{\par}
-\newenvironment{ekeywords}{\linespread{1.23809}\zihao{5}\textbf{Key words:}~}{\par}
+\newenvironment{ckeywords}{%
+  \linespread{1.44444}\zihao{-5}\kaishu\bfseries
+  \begingroup
+    \heiti【关键词】
+  \endgroup}{\par}
+\newenvironment{ekeywords}{%
+  \linespread{1.23809}\zihao{5}\textbf{Key words:}~}{\par}
 
 %%（五）目录（可省项）
 %%采用五号字，其中每章标题用黑体字，每节标题用宋体字，并注明各章节起始页码，题目和页码用“……”相连，目录中标题应与正文中标题一致。
-\RequirePackage{titlesec}
-\RequirePackage{titletoc}
+\RequirePackage[hidelinks]{hyperref}
 \renewcommand{\tableofcontents}{%
-  \clearpage%
-  \begingroup%
-    \titleformat{\chapter}{\zihao{4}\heiti\centering}{}{0pt}{}%
-    \chapter*{\contentsname}%
-  \endgroup%
-  \@starttoc{toc}%
+  \if@twocolumn
+    \@restonecoltrue\onecolumn
+  \else
+    \@restonecolfalse
+  \fi
+  \clearpage
+  \begingroup
+    \linespread{1.85714}\zihao{4}\heiti\centering\contentsname\par
+  \endgroup
+  \blankline
+  \@starttoc{toc}
+  \if@restonecol\twocolumn\fi
   \clearpage}
+
+\RequirePackage{titletoc}
 \contentsmargin{0pt}
-\newcounter{chaptercounter}
-\ifx\bathesis@subject\@science
-  \titlecontents{chapter}[0em]{\heiti}{\stepcounter{chaptercounter}\arabic{chaptercounter}\quad}{}{\titlerule*{.}\thecontentspage}
-  \titlecontents{section}[2em]{}{\thecontentslabel\quad}{}{\titlerule*{.}\thecontentspage}
-  \titlecontents{subsection}[4em]{}{\thecontentslabel\quad}{}{\titlerule*{.}\thecontentspage}
-\else
-  \newcounter{sectioncounter}
-  \newcounter{subsectioncounter}
-  \titlecontents{chapter}[0em]{\heiti}{\stepcounter{chaptercounter}\zhnumber{\arabic{chaptercounter}}、}{}{\titlerule*{.}\thecontentspage}  
-  \titlecontents{section}[2em]{}{\stepcounter{sectioncounter}（\zhnumber{\arabic{sectioncounter}}）}{}{\titlerule*{.}\thecontentspage}
-  \titlecontents{subsection}[4em]{}{\stepcounter{subsectioncounter}\arabic{subsectioncounter}.}{}{\titlerule*{.}\thecontentspage}
-\fi
+\titlecontents{chapter}[0em]{\heiti}{%
+  \thecontentslabel\if@arabic\quad\fi}{}{\titlerule*{.}\thecontentspage}
+\titlecontents{section}[2em]{}{%
+  \thecontentslabel\if@arabic\quad\fi}{}{\titlerule*{.}\thecontentspage}
+\titlecontents{subsection}[4em]{}{%
+  \thecontentslabel\if@arabic\quad\fi}{}{\titlerule*{.}\thecontentspage}
 
 %%（六）正文行间距要求
 %%正文行距设置：设单倍行距。
 %%每章题目与每节题目之间的行距设置：设单倍行距，段前1行、段后0.5 行。
 %%每节题目与小节题目之间的行距设置：单倍行距，段前0.5 行。
-\titleclass{\chapter}{straight}
-\ifx\bathesis@subject\@science
-  \titlespacing{\chapter}{0pt}{*2}{*2}
-  \titlespacing{\section}{0pt}{*2}{*2}
-  \titlespacing{\subsection}{0pt}{*2}{*2}
-\else
-  \titlespacing{\chapter}{2em}{*2}{*2}
-  \titlespacing{\section}{2em}{*2}{*2}
-  \titlespacing{\subsection}{2em}{*2}{*2}
-\fi
-
 %%（七） 正文章节序号编制可采取以下格式：
 %%%第一种：
 %%%1
@@ -171,14 +174,53 @@
 %%%（1）××××××××××（左缩进2个汉字字符，五号宋体）
 %%%（二）×××××××××（左缩进2个汉字字符，小四号黑体）
 %%%- - - - - - - -- -  -（内容省略）- - - - - - - -- - - -- -
-\ifx\bathesis@subject\@science
-  \titleformat{\chapter}{\zihao{4}\heiti\bfseries}{\thechapter}{1em}{}
-  \titleformat{\section}{\zihao{-4}\heiti\bfseries}{\thesection}{1em}{}
-  \titleformat{\subsection}{\zihao{5}\heiti\bfseries}{\thesubsection}{1em}{}
+\ctexset{%
+  chapter={%
+    format={\linespread{1.85714}\zihao{4}\heiti\bfseries},
+    beforeskip={15.6bp},
+    afterskip={15.6bp},
+    fixskip=true,
+    break={},
+    tocline={\CTEXnumberline{#1}#2},
+  },
+  section={%
+    format={\linespread{1.08333}\zihao{-4}\heiti\bfseries},
+    beforeskip={7.8bp},
+    afterskip={7.8bp},
+    fixskip=true,
+  },
+  subsection={%
+    format={\linespread{1.23809}\zihao{5}\heiti\bfseries},
+    beforeskip={7.8bp},
+    afterskip={7.8bp},
+    fixskip=true,
+  }}
+\if@arabic
+  \ctexset{%
+    chapter={%
+      name={},
+      number={\thechapter},
+    }}
 \else
-  \titleformat{\chapter}{\zihao{4}\heiti\bfseries}{\zhnumber{\thechapter}、}{0pt}{}
-  \titleformat{\section}{\zihao{-4}\heiti\bfseries}{（\zhnumber{\arabic{section}}）}{0pt}{}
-  \titleformat{\subsection}{\zihao{5}\heiti\bfseries}{\arabic{subsection}.}{0pt}{}
+  \ctexset{%
+    chapter={%
+      name={,、},
+      number={\chinese{chapter}},
+      aftername={},
+      indent={2\ccwd},
+    },
+    section={%
+      name={（,）},
+      number={\chinese{section}},
+      aftername={},
+      indent={2\ccwd},
+    },
+    subsection={%
+      name={,.},
+      number={\arabic{subsection}},
+      aftername={},
+      indent={2\ccwd},
+    }}
 \fi
 
 %%（八）毕业论文（设计）的公式、图与表
@@ -189,10 +231,6 @@
 %%图序与图名居中置于图的下方。
 %%表序与表名置于表的上方。
 \RequirePackage[labelsep=quad]{caption}
-\RequirePackage[hidelinks]{hyperref}
-\renewcommand*{\equationautorefname}{公式}
-\renewcommand*{\figureautorefname}{图}
-\renewcommand*{\tableautorefname}{表}
 \renewcommand*{\theequation}{\thechapter-\arabic{equation}}
 \renewcommand*{\thefigure}{\thechapter-\arabic{figure}}
 \renewcommand*{\thetable}{\thechapter-\arabic{table}}
@@ -214,10 +252,8 @@
 %%文科论文的文后注释格式参照参考文献格式，但序号不能使用[1]，[2]，[3]等数码表示，以免与参考文献的序码相混淆。
 \RequirePackage[sorting=none,style=gb7714-2015]{biblatex}
 \defbibheading{bibliography}[\bibname]{%
-  \begingroup%
-    \titlespacing{\subsection}{0pt}{0pt}{0pt}%
-    \subsection*{#1}%
-  \endgroup%
+  \subsection*{#1}
+  \phantomsection
   \addcontentsline{toc}{chapter}{#1}}
 \setlength{\bibitemsep}{0pt}
 \renewcommand{\footnotesize}{\zihao{-5}}

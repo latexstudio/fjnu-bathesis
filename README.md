@@ -100,7 +100,7 @@
 >1.1.1
 
 ```
-\documentclass[subject=science]{bathesis}
+\documentclass[arabic]{bathesis}
 ```
 
 第二种
@@ -114,7 +114,7 @@
 >（1）
 
 ```
-\documentclass[subject=arts]{bathesis}
+\documentclass{bathesis}
 ```
 
 理工科专业应采用第一种。
@@ -188,12 +188,8 @@
 \begin{figure}[h]
 \centering
 \includegraphics{×××}
-\caption{\label{fig:×××}×××}
+\caption{\label{×××}×××}
 \end{figure}
-```
-
-```
-\autoref{fig:×××}
 ```
 
 表序与表名置于表的上方。
@@ -201,17 +197,13 @@
 ```
 \begin{table}[h]
 \centering
-\caption{\label{tab:×××}×××}
+\caption{\label{×××}×××}
 \begin{tabular}{cc}
 \hline
  & \\
 \hline
 \end{tabular}
 \end{table}
-```
-
-```
-\autoref{tab:×××}
 ```
 
 ### （九）毕业论文（设计）文后注释（可省项）、参考文献
